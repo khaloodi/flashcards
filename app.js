@@ -11,7 +11,8 @@ app.set('view engine', 'pug')
 // root route
 app.get('/', (req, res) => {
     //call back function for when client requests this route
-    res.send('<h1>I love cheese</h1>');
+    // res.send('<h1>I love cheese</h1>');
+    res.render('index')
 });
 
 app.get('/hello', (req, res) => {
