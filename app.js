@@ -5,6 +5,9 @@ const express = require('express')
 // app is the central part of our application, we will extend it with routes, middleware, and other settings
 const app = express();
 
+// tells express which template engine to use, by default templates are saved in a folder called views
+app.set('view engine', 'pug')
+
 // root route
 app.get('/', (req, res) => {
     //call back function for when client requests this route
