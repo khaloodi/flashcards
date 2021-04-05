@@ -17,7 +17,9 @@ app.get('/', (req, res) => {
 
 app.get('/cards', (req, res) => {
     //call back function for when client requests this route
-    res.render('card', { prompt: "Who is buried in Grant's tomb?" });
+    // res.render('card', { prompt: "Who is buried in Grant's tomb?" });
+    res.locals.prompt = "Who is buried in Grant's tomb?"
+    res.render('card');
 });
 
 // setup developmentserver
