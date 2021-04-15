@@ -38,6 +38,10 @@ app.get('/sandbox', (req, res) => {
     // res.render('card');
 });
 
+app.get('/hello', (req, res) => {
+    res.render('hello')
+});
+
 // setup developmentserver
 // takes port number as parameter
 app.listen(3000, () => {
