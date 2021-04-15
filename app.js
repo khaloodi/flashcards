@@ -1,9 +1,11 @@
 // import module
 const express = require('express')
+const bodyParser = require('body-parser')
 
 // express function returns an express application
 // app is the central part of our application, we will extend it with routes, middleware, and other settings
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }))
 
 const colors = [
     'red',
@@ -39,6 +41,11 @@ app.get('/sandbox', (req, res) => {
 });
 
 app.get('/hello', (req, res) => {
+    res.render('hello')
+});
+
+app.post('/hello', (req, res) => {
+    console.dir(req.body)
     res.render('hello')
 });
 
