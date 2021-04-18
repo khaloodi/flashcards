@@ -1,11 +1,13 @@
 // import module
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 // express function returns an express application
 // app is the central part of our application, we will extend it with routes, middleware, and other settings
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
 
 const colors = [
     'red',
@@ -23,7 +25,12 @@ app.set('view engine', 'pug')
 app.get('/', (req, res) => {
     //call back function for when client requests this route
     // res.send('<h1>I love cheese</h1>');
-    res.render('index')
+    const name = req.cookies.username
+    if (name) {
+        res.render('index', { name })
+    } else {
+        res.redirect('/hello')
+    }
 });
 
 app.get('/cards', (req, res) => {
@@ -41,13 +48,25 @@ app.get('/sandbox', (req, res) => {
 });
 
 app.get('/hello', (req, res) => {
-    res.render('hello')
+    const name = req.cookies.username
+    if (name) {
+        res.redirect('/')
+    } else {
+        res.render('hello')
+    }
 });
 
 app.post('/hello', (req, res) => {
     // console.dir(req.body)
-    res.render('hello', { name: req.body.username })
+    res.cookie('username', req.body.username)
+        // res.render('hello', { name: req.body.username })
+    res.redirect('/')
         // res.json(req.body)
+});
+
+app.post('/goodbye', (req, res) => {
+    res.clearCookie('username')
+    res.redirect('/hello')
 });
 
 // setup developmentserver
