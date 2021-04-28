@@ -21,6 +21,20 @@ const colors = [
 // tells express which template engine to use, by default templates are saved in a folder called views
 app.set('view engine', 'pug')
 
+
+// Middleware goes here
+// often we pass middleware as an anonymous function to the app use method
+// middleware runs every time a request comes through the app
+app.use((req, res, next) => {
+    req.message = 'This message made it' //message is not a special name, can call anything or add more properties if wanted
+    next() // passing control forward throughout the app
+})
+
+app.use((req, res, next) => {
+    console.log(req.message)
+    next() // passing control forward throughout the app
+})
+
 // root route
 app.get('/', (req, res) => {
     //call back function for when client requests this route
