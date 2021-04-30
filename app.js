@@ -28,7 +28,7 @@ app.set('view engine', 'pug')
 app.use((req, res, next) => {
     // req.message = 'This message made it' //message is not a special name, can call anything or add more properties if wanted
     console.log('Hello')
-    const err = new Error('Oh noes')
+    const err = new Error('Oh noes!')
     err.status = 500
     next(err) // passing control forward throughout the app, signals the end of middleware functions
         // the app will "hang" if middleware doesn't end with a next method
@@ -90,10 +90,17 @@ app.post('/goodbye', (req, res) => {
     res.redirect('/hello')
 });
 
+// 404 error
+app.use((req, res, next) => {
+    const error = new Error('Not Found')
+    err.status = 404
+    next(err)
+})
+
 app.use((err, req, res, next) => {
     // res.locals.error = err   .... if I use this line with locals I don't need the err object below
     res.locals.error = err
-    res.status(500) // causes the error code to pop up which is not something baked into javascripts error object
+    res.status(err.status) // causes the error code to pop up which is not something baked into javascripts error object
     res.render('error')
         //giving the template access to the error data via err object with res.render('error', err) doesn't work for some reason
 })
