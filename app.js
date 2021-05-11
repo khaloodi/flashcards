@@ -53,20 +53,22 @@ const cardRoutes = require('./routes/cards')
 app.use(mainRoutes)
 app.use('/cards', cardRoutes)
 
-// 404 error
-app.use((req, res, next) => {
-    const error = new Error('Not Found')
-    err.status = 404
-    next(err)
-})
+/*
+    // 404 error
+    app.use((req, res, next) => {
+        const error = new Error('Not Found')
+        err.status = 404
+        next(err)
+    })
 
-app.use((err, req, res, next) => {
-    // res.locals.error = err   .... if I use this line with locals I don't need the err object below
-    res.locals.error = err
-    res.status(err.status) // causes the error code to pop up which is not something baked into javascripts error object
-    res.render('error')
-        //giving the template access to the error data via err object with res.render('error', err) doesn't work for some reason
-})
+    app.use((err, req, res, next) => {
+        // res.locals.error = err   .... if I use this line with locals I don't need the err object below
+        res.locals.error = err
+        res.status(err.status) // causes the error code to pop up which is not something baked into javascripts error object
+        res.render('error')
+            //giving the template access to the error data via err object with res.render('error', err) doesn't work for some reason
+    })
+*/
 
 // setup developmentserver
 // takes port number as parameter
