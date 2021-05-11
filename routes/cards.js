@@ -8,13 +8,20 @@ router.get('/:id', (req, res) => { // instead of writing /cards, it's just / bec
     const { side } = req.query
     const { id } = req.params
     const text = cards[id][side]
-    const hint = cards[id].hint
+        // const hint = cards[id].hint
+    const { hint } = cards[id]
 
-    const templateData = { text, hint }
+    const templateData = { text }
+
+    if (side === 'question') {
+        templateData.hint = hint
+    }
+
+    // after
     res.render('card', templateData)
-        //call back function for when client requests this route
 
     /* before 
+    //call back function for when client requests this route
     res.render('card', {
         // prompt: "Who is buried in Grant's tomb?",
         prompt: cards[req.params.id].question,
