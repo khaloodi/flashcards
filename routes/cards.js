@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => { // instead of writing /cards, it's just / bec
     const { side } = req.query
     const { id } = req.params
     const text = cards[id][side]
-    const hint = cards[id]
+    const hint = cards[id].hint
 
     const templateData = { text, hint }
     res.render('card', templateData)
