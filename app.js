@@ -42,53 +42,8 @@ app.use((req, res, next) => {
     next() // passing control forward throughout the app signals the end of middleware functions
 })
 
-// root route
-app.get('/', (req, res) => {
-    //call back function for when client requests this route
-    // res.send('<h1>I love cheese</h1>');
-    const name = req.cookies.username
-    if (name) {
-        res.render('index', { name })
-    } else {
-        res.redirect('/hello')
-    }
-});
-
-app.get('/cards', (req, res) => {
-    //call back function for when client requests this route
-    res.render('card', { prompt: "Who is buried in Grant's tomb?", hint: "Think about whose tomb it is?" });
-    // res.locals.prompt = "Who is buried in Grant's tomb?"
-    // res.render('card');
-});
-
-app.get('/sandbox', (req, res) => {
-    //call back function for when client requests this route
-    res.render('sandbox', { prompt: "Who is buried in Grant's tomb?", hint: "Think about whose tomb it is?", colors });
-    // res.locals.prompt = "Who is buried in Grant's tomb?"
-    // res.render('card');
-});
-
-app.get('/hello', (req, res) => {
-    const name = req.cookies.username
-    if (name) {
-        res.redirect('/')
-    } else {
-        res.render('hello')
-    }
-});
-
-app.post('/hello', (req, res) => {
-    // console.dir(req.body)
-    res.cookie('username', req.body.username)
-        // res.render('hello', { name: req.body.username })
-    res.redirect('/')
-        // res.json(req.body)
-});
-
-app.post('/goodbye', (req, res) => {
-    res.clearCookie('username')
-    res.redirect('/hello')
-});
+const routes = require('./routes')
+app.use(routes)
 
 // 404 error
 app.use((req, res, next) => {
