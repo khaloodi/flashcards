@@ -28,9 +28,14 @@ app.set('view engine', 'pug')
 app.use((req, res, next) => {
     // req.message = 'This message made it' //message is not a special name, can call anything or add more properties if wanted
     console.log('Hello')
-    const err = new Error('Oh noes!')
-    err.status = 500
-    next(err) // passing control forward throughout the app, signals the end of middleware functions
+    next()
+        /* 
+        //this block will cause an error if I want to see what errors look like
+        const err = new Error('Oh noes!')
+        err.status = 500
+        next(err)
+        */
+        // passing control forward throughout the app, signals the end of middleware functions
         // the app will "hang" if middleware doesn't end with a next method
         // with the get methods we don't need next because they are sending a response to the user
         // such as json res.send or res.render
@@ -42,8 +47,11 @@ app.use((req, res, next) => {
     next() // passing control forward throughout the app signals the end of middleware functions
 })
 
-const routes = require('./routes')
-app.use(routes)
+const mainRoutes = require('./routes')
+const cardRoutes = require('./routes/cards')
+
+app.use(mainRoutes)
+app.use('/cards', cardRoutes)
 
 // 404 error
 app.use((req, res, next) => {

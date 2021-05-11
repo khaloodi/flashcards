@@ -13,13 +13,6 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/cards', (req, res) => {
-    //call back function for when client requests this route
-    res.render('card', { prompt: "Who is buried in Grant's tomb?", hint: "Think about whose tomb it is?" });
-    // res.locals.prompt = "Who is buried in Grant's tomb?"
-    // res.render('card');
-});
-
 router.get('/sandbox', (req, res) => {
     //call back function for when client requests this route
     res.render('sandbox', { prompt: "Who is buried in Grant's tomb?", hint: "Think about whose tomb it is?", colors });
