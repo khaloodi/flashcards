@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router() // a router is like a mini app in express, you can write middleware and routes to it
+require('../data/flashcardData.json')
 
 router.get('/', (req, res) => { // instead of writing /cards, it's just / because every route in this file technically begins with cards
     //call back function for when client requests this route
