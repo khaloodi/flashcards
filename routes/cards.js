@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => { // instead of writing /cards, it's just / bec
     const { hint } = cards[id]
 
     if (!side) {
-        res.redirect(`/cards/${id}?side=question`)
+        return res.redirect(`/cards/${id}?side=question`)
     }
 
     const templateData = { id, text, name }
