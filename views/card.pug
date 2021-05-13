@@ -8,3 +8,6 @@ block content
         i Hint: #{hint}
     //- else 
     //-   p (There is no hint.)
+    a(href=`${id}?side=${sideToShow}`)= sideToShowDisplay
+    br
+    a(href='/cards') Next card

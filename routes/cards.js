@@ -3,18 +3,34 @@ const router = express.Router() // a router is like a mini app in express, you c
 const { data } = require('../data/flashcardData.json')
 const { cards } = data //putting the data into an object called cards
 
+router.get('/', (req, res) => {
+    const numberOfCards = cards.length
+    const flashcardId = Math.floor(Math.random() * numberOfCards)
+    res.redirect(`/cards/${flashcardId}?side=question`)
+})
+
 router.get('/:id', (req, res) => { // instead of writing /cards, it's just / because every route in this file technically begins with cards
 
     const { side } = req.query
     const { id } = req.params
+    const name = req.cookies.username
     const text = cards[id][side]
         // const hint = cards[id].hint
     const { hint } = cards[id]
 
-    const templateData = { text }
+    if (!side) {
+        res.redirect(`/cards/${id}?side=question`)
+    }
+
+    const templateData = { id, text, name }
 
     if (side === 'question') {
         templateData.hint = hint
+        templateData.sideToShow = 'answer'
+        templateData.sideToShowDisplay = 'Answer'
+    } else if (side === 'answer') {
+        templateData.sideToShow = 'question'
+        templateData.sideToShowDisplay = 'Question'
     }
 
     // after
