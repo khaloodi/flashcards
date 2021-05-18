@@ -6,10 +6,10 @@ html(lang="en")
   body 
     include includes/header.pug
     
-    if name
-      h2 Welcome, #{name}!
-      form(action='/goodbye', method='post')
-        button(type='submit') Goodbye 
-    block content
-    include includes/footer.pug 
+    //- if name
+    //-   h2 Welcome, #{name}!
+    //-   form(action='/goodbye', method='post')
+    //-     button(type='submit') Goodbye 
+    block main
+    //- include includes/footer.pug 
     

@@ -6,7 +6,7 @@ const { cards } = data //putting the data into an object called cards
 router.get('/', (req, res) => {
     const numberOfCards = cards.length
     const flashcardId = Math.floor(Math.random() * numberOfCards)
-    res.redirect(`/cards/${flashcardId}?side=question`)
+    res.redirect(`/cards/${flashcardId}`)
 })
 
 router.get('/:id', (req, res) => { // instead of writing /cards, it's just / because every route in this file technically begins with cards
